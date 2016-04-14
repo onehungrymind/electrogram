@@ -2,8 +2,8 @@ typings
 build
 app/**/*.js
 app/**/*.map
+.DS_Store
 node_modules
 jspm_packages
 bower_components
-.DS_Store
 .idea/
