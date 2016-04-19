@@ -11,8 +11,10 @@
   "author": "One Hungry Mind",
   "license": "MIT",
   "devDependencies": {
+    "css-loader": "^0.23.1",
     "electron-prebuilt": "^0.35.6",
-    "ts-loader": "^0.7.2",    
+    "json-loader": "^0.5.4",
+    "ts-loader": "^0.7.2",
     "typescript": "^1.8.10",
     "typings": "^0.7.12",
     "webpack": "^1.12.15",
@@ -20,10 +22,11 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.14",
-    "systemjs": "0.19.26",
     "es6-shim": "^0.35.0",
+    "fs": "0.0.2",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
+    "systemjs": "0.19.26",
     "zone.js": "0.6.10"
   }
 }

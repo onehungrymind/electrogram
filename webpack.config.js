@@ -35,6 +35,14 @@ module.exports = {
         test: /\.ts$/,
         loader: 'ts',
         exclude: [ /node_modules/ ]
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
+        test: /\.css$/,
+        loader: 'css'
       }
     ]
   },

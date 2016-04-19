@@ -1,0 +1,34 @@
+* {
+  font-family: "Arial", "sans-serif";
+}
+
+.dropzone {
+  height: 300px;
+  border: 5px dotted #ccc;
+}
+
+.dropzone p {
+  margin: 10px;
+  text-align: center;
+}
+
+select {
+  -webkit-appearance: menulist-button;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+button {
+  font-size: 16px;
+}
+
+img {
+  box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.5);
+  border-radius: 3px;
+}
+
+.control {
+  display: inline-block;
+  margin-right: 15px;
+}
