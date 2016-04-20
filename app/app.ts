@@ -29,11 +29,12 @@ import {NgFor} from 'angular2/common';
       <button (click)="open()">Open...</button>
     </div>
     <div class="control">
-      <button>Save</button>
+      <button (click)="save(canvas)">Save</button>
     </div>
 
     <div class="photowrapper">
-      <img id="photo" src="{{image.path}}">
+      <!-- <img id="photo" src="{{image.path}}"> -->
+      <canvas #canvas id="photo"></canvas>
     </div>
   `,
   styles: [`
@@ -65,11 +66,16 @@ import {NgFor} from 'angular2/common';
     img {
       box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.5);
       border-radius: 3px;
+      width: 100%;
     }
 
     .control {
       display: inline-block;
       margin-right: 15px;
+    }
+
+    canvas {
+      width: 100%;
     }
   `]
 })
@@ -81,8 +87,9 @@ export class App {
   currentFilter: String = '';
   dialog: Object = window.require('remote').require('dialog');
   fs: Object = require('fs');
+  canvasBuffer = window.require('electron-canvas-to-buffer');
 
-  constructor(private cd: ChangeDetectorRef) {  }
+  constructor(private cd: ChangeDetectorRef) {}
 
   handleDrop(e) {
     var files:File = e.dataTransfer.files;
@@ -90,6 +97,7 @@ export class App {
     Object.keys(files).forEach((key) => {
       if(files[key].type === "image/png" || files[key].type === "image/jpeg") {
         self.image = files[key];
+        this.putImageInCanvas();
       }
       else {
         alert("File must be a PNG or JPEG!");
@@ -100,27 +108,47 @@ export class App {
   }
 
   open() {
+    let self = this;
     this.dialog.showOpenDialog( (fileNames) => {
       if (fileNames === undefined) return;
       let fileName = fileNames[0];
       this.fs.readFile(fileName, 'utf-8', (err, data) => {
-        this.image.path = fileName;
-        this.cd.detectChanges();
+        self.image.path = fileName;
+        this.putImageInCanvas();
       });
+    });
+  }
+
+  putImageInCanvas() {
+    let self = this;
+
+    Caman('#photo', this.image.path, function() {
+      this.render();
+      self.cd.detectChanges();
     });
   }
 
   setFilter(value) {
     let self = this;
 
-    Caman('#photo', function() {
-      this[value]();
+    Caman('#photo', this.image.path, function() {
+      this.revert();
+      if (this[value]) this[value]();
       this.render();
       self.cd.detectChanges();
     });
   }
 
-  save() {}
+  save(canvas) {
+    let self = this;
+    this.dialog.showSaveDialog(function (fileName) {
+      if (fileName === undefined) return;
+
+      let buffer = self.canvasBuffer(canvas, 'image/png');
+
+      self.fs.writeFile(fileName, buffer, function (err) {});
+    });
+  }
 }
 
 bootstrap(App);
