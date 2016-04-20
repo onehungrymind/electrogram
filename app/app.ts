@@ -12,22 +12,22 @@ import {NgFor} from 'angular2/common';
 
 export class App {
 
-  image: {path: String} = { path: '' };
-  filters: any = filters;
-  currentFilter: String = '';
+  image: { path: string } = {path: ''};
+  filters: Array<Object> = filters;
+  currentFilter: string = '';
   dialog: Electron.Dialog = window.require('remote').require('dialog');
   fs: any = window.require('fs');
-  canvasBuffer = window.require('electron-canvas-to-buffer');
+  canvasBuffer: any = window.require('electron-canvas-to-buffer');
 
   constructor(private cd: ChangeDetectorRef) {}
 
   handleDrop(e) {
-    var files:File = e.dataTransfer.files;
+    var files: File = e.dataTransfer.files;
     var self = this;
     Object.keys(files).forEach((key) => {
       if(files[key].type === "image/png" || files[key].type === "image/jpeg") {
-        self.image = files[key];
-        this.putImageInCanvas();
+        self.image.path = files[key].path;
+        self.setFilter(self.currentFilter);
       }
       else {
         alert("File must be a PNG or JPEG!");
@@ -44,33 +44,29 @@ export class App {
       let fileName = fileNames[0];
       this.fs.readFile(fileName, 'utf-8', (err, data) => {
         self.image.path = fileName;
-        this.putImageInCanvas();
+        self.setFilter(self.currentFilter);
       });
-    });
-  }
-
-  putImageInCanvas() {
-    let self = this;
-
-    Caman('#photo', this.image.path, function() {
-      this.render();
-      self.cd.detectChanges();
     });
   }
 
   setFilter(value) {
     let self = this;
 
-    Caman('#photo', this.image.path, function() {
+    self.currentFilter = value;
+
+    Caman('#photo', function() {
       this.revert();
       if (this[value]) this[value]();
       this.render();
+
       self.cd.detectChanges();
     });
   }
 
-  save(canvas) {
-    let self = this;
+  save() {
+    let self = this,
+        canvas = document.getElementsByTagName('canvas')[0];
+
     this.dialog.showSaveDialog(function (fileName) {
       if (fileName === undefined) return;
 

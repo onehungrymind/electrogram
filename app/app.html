@@ -20,9 +20,9 @@
   <button (click)="open()">Open...</button>
 </div>
 <div class="control">
-  <button (click)="save(canvas)">Save</button>
+  <button (click)="save()">Save</button>
 </div>
 
 <div class="photowrapper">
-  <canvas #canvas id="photo"></canvas>
+  <img id="photo" src="{{image.path}}">
 </div>
