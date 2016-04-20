@@ -43,6 +43,10 @@ module.exports = {
       {
         test: /\.(css|html)$/,
         loader: 'raw'
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url?limit=10000'
       }
     ]
   },

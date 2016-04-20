@@ -3,13 +3,29 @@
 }
 
 .dropzone {
-  height: 300px;
-  border: 5px dotted #ccc;
+  min-height: 300px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: white;
 }
 
-.dropzone p {
-  margin: 10px;
-  text-align: center;
+.dropzone img {
+  width: 100%;
+  margin-top: 15px;
+  max-width: 200px;
+  box-shadow: 0 2px 10px 0px rgba(0,0,0,0.5);
+  margin-top: 20px;
+}
+
+.dropzone canvas {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
+  height: auto !important;
+  box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.5);
+  border-radius: 3px;
+  margin-top: 15px;
 }
 
 select {
@@ -23,18 +39,30 @@ button {
   font-size: 16px;
 }
 
-img {
-  box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.5);
-  border-radius: 3px;
-  width: 100%;
-}
-
 .control {
   display: inline-block;
   margin-right: 15px;
 }
 
-canvas {
-  width: 100% !important;
-  height: auto !important;
+.carousel {
+  white-space: nowrap;
+  overflow: scroll;
+  padding: 20px;
+}
+
+.carousel .thumb {
+  width: 150px;
+  display: inline-block;
+  margin: 0 10px;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px 0px rgba(0,0,0,0.5);
+}
+
+.carousel img, .carousel canvas {
+  width: 150px;
+}
+
+.carousel .thumb:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 15px 0px rgba(0,0,0,0.5);
 }

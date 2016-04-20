@@ -1,11 +1,25 @@
-<div
+<!-- <canvas id="canvas"></canvas> -->
+
+<div [ngStyle]="{'border': showDropzone ? '5px dotted #ccc' : 'none'}"
   (dragover)="false"
   (dragend)="false"
   (drop)="handleDrop($event)"
   class="dropzone">
-  <p>
-    <strong>Drop Your Images Here</strong>
-  </p>
+  <div #canvasWrapper>
+    <div *ngIf="showDropzone">
+      <p>
+        <strong>Drop a PNG or JPG</strong>
+      </p>
+      <img src="./placeholder.png">
+    </div>
+    <img *ngIf="image.path" id="photo" src="{{image.path}}">
+  </div>
+</div>
+
+<div *ngIf="!showDropzone" class="carousel">
+  <div thumbnail [filter]="filter" [path]="image.path" class="thumb" (click)="setFilter(filter.className)" *ngFor="#filter of filters">
+    <img id="{{filter.className}}" src="{{image.path}}" alt=""/>
+  </div>
 </div>
 
 <div class="control">
@@ -20,9 +34,5 @@
   <button (click)="open()">Open...</button>
 </div>
 <div class="control">
-  <button (click)="save()">Save</button>
-</div>
-
-<div class="photowrapper">
-  <img id="photo" src="{{image.path}}">
+  <button (click)="save(canvasWrapper)">Save</button>
 </div>
