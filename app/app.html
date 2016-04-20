@@ -1,0 +1,28 @@
+<div
+  (dragover)="false"
+  (dragend)="false"
+  (drop)="handleDrop($event)"
+  class="dropzone">
+  <p>
+    <strong>Drop Your Images Here</strong>
+  </p>
+</div>
+
+<div class="control">
+  <label>Filter:</label>
+  <select [ngModel]="currentFilter" (ngModelChange)="setFilter($event)">
+    <option value="">Select...</option>
+    <option value="">#noFilter</option>
+    <option *ngFor="#filter of filters" value="{{filter.className}}">{{filter.label}}</option>
+  </select>
+</div>
+<div class="control">
+  <button (click)="open()">Open...</button>
+</div>
+<div class="control">
+  <button (click)="save(canvas)">Save</button>
+</div>
+
+<div class="photowrapper">
+  <canvas #canvas id="photo"></canvas>
+</div>

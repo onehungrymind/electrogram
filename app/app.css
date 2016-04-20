@@ -26,9 +26,15 @@ button {
 img {
   box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.5);
   border-radius: 3px;
+  width: 100%;
 }
 
 .control {
   display: inline-block;
   margin-right: 15px;
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
 }
