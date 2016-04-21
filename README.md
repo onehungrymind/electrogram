@@ -28,7 +28,7 @@ npm run electron
 ```
 
 ## Distributing the app
-We've included an NPM script that will built a distrubtion version of the app for OSX. To use it, execute `npm run distribute`; this will create an OSX app in `releases/Electrogram-darwin-x64` that you can run from Spotlight and Finder. For more info, check out https://github.com/electron-userland/electron-packager.
+We've included an NPM script that will build a distrubtion version of the app for OSX. To use it, execute `npm run distribute`; this will create an OSX app in `releases/Electrogram-darwin-x64` that you can run from Spotlight and Finder. For more info, check out https://github.com/electron-userland/electron-packager.
 
 ## Author
 <img width="50px" src="https://pbs.twimg.com/profile_images/505753644004687872/_5-AcJkD_400x400.jpeg" alt="Luke Ruebbelke">
