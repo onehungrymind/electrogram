@@ -32,4 +32,6 @@ We've included an NPM script that will built a distrubtion version of the app fo
 
 ## Author
 
-Luke Ruebbelke | twitter.com/simpulton | onehungrymind.com
+Luke Ruebbelke 
+| <a href="http://www.twitter.com/simpulton"><img src="https://camo.githubusercontent.com/0dccb70faac21bb33652c53cd5ee4ecb5822ef90/687474703a2f2f692e696d6775722e636f6d2f77577a583975422e706e67" alt="alt text" title="twitter icon without padding" data-canonical-src="http://i.imgur.com/wWzX9uB.png" style="max-width:100%;"></a> 
+| http://onehungrymind.com
