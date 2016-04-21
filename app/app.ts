@@ -67,6 +67,7 @@ export class App {
     this.image.path = path;
     this.setFilter(this.currentFilter);
     this.showDropzone = false;
+    this.cd.detectChanges();
   }
 
   open() {
