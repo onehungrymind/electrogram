@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
-    "electron": "electron app",
-    "distribute": "electron-packager . Electrogram --platform=darwin --arch=x64 --out=releases/ --overwrite --icon=app/electrogram  --asar"
+    "electron": "electron src",
+    "distribute": "electron-packager . Electrogram --platform=darwin --arch=x64 --out=releases/ --overwrite --icon=src/assets/electrogram  --asar"
   },
   "author": "One Hungry Mind",
   "license": "MIT",

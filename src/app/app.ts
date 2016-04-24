@@ -1,4 +1,4 @@
-let filters = require('./filters.json');
+let filters = require('./../assets/data/filters.json');
 
 import {bootstrap} from 'angular2/platform/browser';
 import {Input, Component, Directive, ChangeDetectorRef, ElementRef} from 'angular2/core';
