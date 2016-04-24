@@ -1,10 +1,7 @@
+node_modules
 typings
 build
-app/**/*.js
-app/**/*.map
-.DS_Store
-node_modules
-jspm_packages
-bower_components
-.idea/
 releases
+
+.DS_Store
+.idea/
