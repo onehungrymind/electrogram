@@ -1,8 +1,7 @@
 let filters = require('./../assets/data/filters.json');
 
 import {bootstrap} from 'angular2/platform/browser';
-import {Input, Component, Directive, ChangeDetectorRef, ElementRef} from 'angular2/core';
-import {NgFor} from 'angular2/common';
+import {Input, Component, Directive, ChangeDetectorRef} from 'angular2/core';
 
 @Directive({
   selector: '[thumbnail]'
@@ -41,7 +40,7 @@ export class App {
   image: { path: string } = {path: ''};
   filters: Array<Object> = filters;
   currentFilter: string = '';
-  dialog: Electron.Dialog = window.require('remote').require('dialog');
+  dialog: any = window.require('remote').require('dialog');
   fs: any = window.require('fs');
   canvasBuffer: any = window.require('electron-canvas-to-buffer');
   showDropzone: boolean = true;
@@ -52,11 +51,11 @@ export class App {
     var files: File = e.dataTransfer.files;
     var self = this;
     Object.keys(files).forEach((key) => {
-      if(files[key].type === "image/png" || files[key].type === "image/jpeg") {
+      if(files[key].type === 'image/png' || files[key].type === 'image/jpeg') {
         self.setImage(files[key].path);
       }
       else {
-        alert("File must be a PNG or JPEG!");
+        alert('File must be a PNG or JPEG!');
       }
     });
 

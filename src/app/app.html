@@ -1,5 +1,3 @@
-<!-- <canvas id="canvas"></canvas> -->
-
 <div [ngStyle]="{'border': showDropzone ? '5px dotted #ccc' : 'none'}"
   (dragover)="false"
   (dragend)="false"
@@ -10,30 +8,25 @@
       <p>
         <strong>Drop a PNG or JPG</strong>
       </p>
-      <img src="../assets/images/placeholder.png">
+      <img src="assets/images/placeholder.png">
     </div>
     <img *ngIf="image.path" id="photo" src="{{image.path}}">
   </div>
 </div>
 
 <div *ngIf="!showDropzone" class="carousel">
-  <div thumbnail [filter]="filter" [path]="image.path" class="thumb" (click)="setFilter(filter.className)" *ngFor="#filter of filters">
+  <div thumbnail class="thumb" [filter]="filter" [path]="image.path" (click)="setFilter(filter.className)" *ngFor="#filter of filters">
     <img id="{{filter.className}}" src="{{image.path}}" alt=""/>
   </div>
 </div>
 
-<div class="control">
-  <label>Filter:</label>
-  <select [ngModel]="currentFilter" (ngModelChange)="setFilter($event)">
-    <option value="">Select...</option>
-    <option value="">#noFilter</option>
-    <option *ngFor="#filter of filters" value="{{filter.className}}">{{filter.label}}</option>
-  </select>
-</div>
 <div class="controls">
   <div class="control">
     <button (click)="open()">
-      <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M38 8h-28c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h8v-4h-8v-20h28v20h-8v4h8c2.21 0 4-1.79 4-4v-24c0-2.21-1.79-4-4-4zm-14 12l-8 8h6v12h4v-12h6l-8-8z"/></svg>
+      <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h48v48h-48z" fill="none"/>
+        <path d="M38 8h-28c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h8v-4h-8v-20h28v20h-8v4h8c2.21 0 4-1.79 4-4v-24c0-2.21-1.79-4-4-4zm-14 12l-8 8h6v12h4v-12h6l-8-8z"/>
+      </svg>
     </button>
   </div>
   <div class="control">

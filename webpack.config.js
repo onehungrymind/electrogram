@@ -14,7 +14,7 @@ module.exports = {
       'angular2/router',
       'angular2/http'
     ],
-    'app': './src/app'
+    'app': './src/app/app.ts'
   },
 
   output: {
