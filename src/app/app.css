@@ -20,8 +20,8 @@
 .dropzone canvas {
   display: block;
   margin: 0 auto;
-  width: 90%;
-  max-width: 500px;
+  max-width: 90%;
+  max-height: 500px;
   height: auto !important;
   box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.5);
   border-radius: 3px;

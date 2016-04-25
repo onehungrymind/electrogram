@@ -1,20 +1,8 @@
 [
-  {"label": "Vintage", "className": "vintage"},
-  {"label": "Lomo", "className": "lomo"},
-  {"label": "Clarity", "className": "clarity"},
-  {"label": "Sin City", "className": "sinCity"},
-  {"label": "Sunrise", "className": "sunrise"},
-  {"label": "Cross", "className": "crossProcess"},
-  {"label": "Orange Peel", "className": "orangePeel"},
-  {"label": "Love", "className": "love"},
-  {"label": "Grungy", "className": "grungy"},
-  {"label": "Jarques", "className": "jarques"},
-  {"label": "Pinhole", "className": "pinhole"},
-  {"label": "Old Boot", "className": "oldBoot"},
-  {"label": "Glowing Sun", "className": "glowingSun"},
-  {"label": "Hazy Days", "className": "hazyDays"},
-  {"label": "Her Majesty", "className": "herMajesty"},
-  {"label": "Nostalgia", "className": "nostalgia"},
-  {"label": "Hemingway", "className": "hemingway"},
-  {"label": "Concentrate", "className": "concentrate"}
+  "#noFilter",
+  "Brighten",
+  "Grayscale",
+  "Sepia",
+  "Negative",
+  "Noise"
 ]

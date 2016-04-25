@@ -2,29 +2,33 @@ let filters = require('./../assets/data/filters.json');
 
 import {bootstrap} from 'angular2/platform/browser';
 import {Input, Component, Directive, ChangeDetectorRef} from 'angular2/core';
+import { CanvasService } from './canvasService';
 
 @Directive({
-  selector: '[thumbnail]'
+  selector: '[thumbnail]',
+  providers: [ CanvasService ]
 })
 
 class Thumbnail {
   currentFilter;
 
   @Input() filter;
-  @Input() path;
+  @Input() image;
+  @Input() childCanvas;
 
-  constructor(private cd: ChangeDetectorRef) {};
+  constructor(private _cs: CanvasService) {};
 
   ngOnChanges() {
-    let self = this,
-        filterName = this.filter.className;
+    if (this.image) {
+      this._cs.initCanvas(this.childCanvas, this.image);
 
-    Caman('#' + filterName, function() {
-      this.reset();
-      if (this[filterName]) this[filterName]();
-      this.render();
-      self.cd.detectChanges();
-    });
+      let filterName = this.filter.toLowerCase();
+
+      if (this._cs[filterName])
+        this._cs[filterName]();
+      else
+        this._cs.resetCanvas();
+    }
   }
 }
 
@@ -32,12 +36,14 @@ class Thumbnail {
   selector: 'app',
   template: require('./app.html'),
   styles: [require('./app.css')],
+  providers: [CanvasService],
   directives: [Thumbnail]
 })
 
 export class App {
 
-  image: { path: string } = {path: ''};
+  canvas;
+  imageElement;
   filters: Array<Object> = filters;
   currentFilter: string = '';
   dialog: any = window.require('remote').require('dialog');
@@ -45,66 +51,74 @@ export class App {
   canvasBuffer: any = window.require('electron-canvas-to-buffer');
   showDropzone: boolean = true;
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(
+    private cd: ChangeDetectorRef,
+    private _cs: CanvasService
+  ) {}
 
-  handleDrop(e) {
+  handleDrop(e, canvas) {
+    e.preventDefault();
     var files: File = e.dataTransfer.files;
-    var self = this;
+
     Object.keys(files).forEach((key) => {
       if(files[key].type === 'image/png' || files[key].type === 'image/jpeg') {
-        self.setImage(files[key].path);
+        this.loadImage(canvas, files[key].path);
       }
       else {
         alert('File must be a PNG or JPEG!');
       }
     });
 
+
     return false;
   }
 
-  setImage(path) {
-    this.image.path = path;
-    this.setFilter(this.currentFilter);
+  loadImage(canvas, fileName) {
+    let image = new Image();
+    image.onload = this.imageLoaded.bind(this, canvas, image);
+    image.src = fileName;
+
     this.showDropzone = false;
-    this.cd.detectChanges();
   }
 
-  open() {
+  open(canvas) {
     let self = this;
     this.dialog.showOpenDialog( (fileNames) => {
       if (fileNames === undefined) return;
       let fileName = fileNames[0];
       this.fs.readFile(fileName, 'utf-8', (err, data) => {
-        self.setImage(fileName);
+        this.loadImage(canvas, fileName)
       });
     });
   }
 
   setFilter(value) {
-    let self = this;
+    let filterName = value.toLowerCase();
 
-    self.currentFilter = value;
-
-    Caman('#photo', function() {
-      self.showDropzone = false;
-      this.revert(false);
-      if (this[value]) this[value]();
-      this.render();
-      self.cd.detectChanges();
-    });
+    if (this._cs[filterName])
+      this._cs[filterName]();
+    else
+      this._cs.resetCanvas();
   }
 
-  save(canvasWrapper) {
-    let self = this,
-        canvas = canvasWrapper.children[0];
+  save(canvas) {
+    let self = this
 
-    this.dialog.showSaveDialog(function (fileName) {
+    this.dialog.showSaveDialog({ filters: [
+     { name: 'png', extensions: ['png'] }
+   ]}, function (fileName) {
       if (fileName === undefined) return;
 
       let buffer = self.canvasBuffer(canvas, 'image/png');
 
       self.fs.writeFile(fileName, buffer, function (err) {});
     });
+  }
+
+  imageLoaded(canvas, image) {
+    this.imageElement = image;
+    this._cs.initCanvas(canvas, image);
+    this.cd.detectChanges();
   }
 }
 
