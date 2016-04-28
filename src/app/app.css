@@ -50,3 +50,35 @@
   cursor: pointer;
   box-shadow: 0 5px 15px 0px rgba(0,0,0,0.5);
 }
+
+button {
+  font-size: 16px;
+  -webkit-appearance: none;
+  background: white;
+  border-radius: 1000px;
+  border: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
+  fill: rgb(25,118,210);
+}
+
+button svg {
+  width: 30px;
+}
+
+button:hover {
+  box-shadow: 0px 5px 15px 3px rgba(0,0,0,0.5);
+}
+
+.controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.control {
+  margin-bottom: 15px;
+}

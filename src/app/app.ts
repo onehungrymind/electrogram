@@ -44,6 +44,8 @@ export class App {
 
   imageElement: HTMLImageElement;
   filters: Array<Object> = filters;
+  dialog: Electron.Dialog = window.require('remote').require('dialog');
+  fs: any = window.require('fs');
   currentFilter: string = '';
   showDropzone: boolean = true;
 
@@ -75,6 +77,17 @@ export class App {
     image.src = fileName;
 
     this.showDropzone = false;
+  }
+
+  open(canvas) {
+    let self = this;
+    this.dialog.showOpenDialog( (fileNames) => {
+      if (fileNames === undefined) return;
+      let fileName = fileNames[0];
+      this.fs.readFile(fileName, 'utf-8', (err, data) => {
+        this.loadImage(canvas, fileName)
+      });
+    });
   }
 
   setFilter(value) {
