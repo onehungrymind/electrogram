@@ -4,34 +4,14 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "build": "webpack --progress --profile --colors --display-error-details --display-cached",
-    "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
-    "electron": "electron src",
-    "distribute": "electron-packager . Electrogram --platform=darwin --arch=x64 --out=releases/ --overwrite --icon=src/assets/images/electrogram  --asar"
+    "start": "electron main.js"
   },
   "author": "One Hungry Mind",
   "license": "MIT",
   "devDependencies": {
-    "css-loader": "^0.23.1",
-    "electron-packager": "^7.0.1",
-    "electron-prebuilt": "^0.35.6",
-    "json-loader": "^0.5.4",
-    "raw-loader": "^0.5.1",
-    "ts-loader": "^0.7.2",
-    "typescript": "^1.8.10",
-    "typings": "^0.7.12",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.12.15",
-    "webpack-dev-server": "^1.14.1"
+    "electron-prebuilt": "^0.35.6"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.14",
-    "electron-canvas-to-buffer": "^1.0.3",
-    "es6-shim": "^0.35.0",
-    "material-design-lite": "^1.1.3",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "systemjs": "0.19.26",
-    "zone.js": "0.6.10"
+    "material-design-lite": "^1.1.3"
   }
 }
