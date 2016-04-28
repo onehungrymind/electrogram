@@ -46,6 +46,7 @@ export class App {
   filters: Array<Object> = filters;
   dialog: Electron.Dialog = window.require('remote').require('dialog');
   fs: any = window.require('fs');
+  canvasBuffer: any = window.require('electron-canvas-to-buffer');
   currentFilter: string = '';
   showDropzone: boolean = true;
 
@@ -87,6 +88,20 @@ export class App {
       this.fs.readFile(fileName, 'utf-8', (err, data) => {
         this.loadImage(canvas, fileName)
       });
+    });
+  }
+
+  save(canvas) {
+    let self = this
+
+    this.dialog.showSaveDialog({ filters: [
+      { name: 'png', extensions: ['png'] }
+    ]}, function (fileName) {
+      if (fileName === undefined) return;
+
+      let buffer = self.canvasBuffer(canvas, 'image/png');
+
+      self.fs.writeFile(fileName, buffer, function (err) {});
     });
   }
 
