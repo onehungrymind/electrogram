@@ -10,11 +10,11 @@ import { CanvasService } from './canvasService';
 })
 
 class Thumbnail {
-  currentFilter;
+  currentFilter: string = '';
 
-  @Input() filter;
-  @Input() image;
-  @Input() childCanvas;
+  @Input() filter: string = '';
+  @Input() image: HTMLImageElement;
+  @Input() childCanvas: HTMLCanvasElement;
 
   constructor(private _cs: CanvasService) {};
 
@@ -42,17 +42,16 @@ class Thumbnail {
 
 export class App {
 
-  canvas;
-  imageElement;
+  imageElement: HTMLImageElement;
   filters: Array<Object> = filters;
   currentFilter: string = '';
-  dialog: any = window.require('remote').require('dialog');
+  dialog: Electron.Dialog = window.require('remote').require('dialog');
   fs: any = window.require('fs');
   canvasBuffer: any = window.require('electron-canvas-to-buffer');
   showDropzone: boolean = true;
 
   constructor(
-    private cd: ChangeDetectorRef,
+    private _cd: ChangeDetectorRef,
     private _cs: CanvasService
   ) {}
 
@@ -74,7 +73,7 @@ export class App {
   }
 
   loadImage(canvas, fileName) {
-    let image = new Image();
+    let image: HTMLImageElement = new Image();
     image.onload = this.imageLoaded.bind(this, canvas, image);
     image.src = fileName;
 
@@ -105,8 +104,8 @@ export class App {
     let self = this
 
     this.dialog.showSaveDialog({ filters: [
-     { name: 'png', extensions: ['png'] }
-   ]}, function (fileName) {
+      { name: 'png', extensions: ['png'] }
+    ]}, function (fileName) {
       if (fileName === undefined) return;
 
       let buffer = self.canvasBuffer(canvas, 'image/png');
@@ -118,7 +117,7 @@ export class App {
   imageLoaded(canvas, image) {
     this.imageElement = image;
     this._cs.initCanvas(canvas, image);
-    this.cd.detectChanges();
+    this._cd.detectChanges();
   }
 }
 
