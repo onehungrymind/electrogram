@@ -6,12 +6,14 @@
   "scripts": {
     "start": "electron src",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
-    "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached"
+    "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
+    "distribute": "electron-packager . Electrogram --platform=darwin --arch=x64 --out=releases/ --overwrite --icon=src/assets/images/electrogram  --asar"
   },
   "author": "One Hungry Mind",
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^0.23.1",
+    "electron-packager": "^7.0.1",
     "electron-prebuilt": "^0.35.6",
     "json-loader": "^0.5.4",
     "raw-loader": "^0.5.1",
