@@ -15,12 +15,11 @@
 </div>
 
 <div *ngIf="!showDropzone" class="carousel">
-  <canvas (click)="setFilter(filter)" *ngFor="#filter of filters"
+  <canvas thumbnail (click)="setFilter(filter)" *ngFor="#filter of filters"
           [filter]="filter" #childCanvas
-          [image]="imageElement" [childCanvas]="childCanvas" thumbnail
+          [image]="imageElement" [childCanvas]="childCanvas"
           class="thumb"></canvas>
 </div>
-
 
 <div class="controls">
   <div class="control">

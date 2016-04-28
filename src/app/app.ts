@@ -44,10 +44,10 @@ export class App {
 
   imageElement: HTMLImageElement;
   filters: Array<Object> = filters;
-  currentFilter: string = '';
   dialog: Electron.Dialog = window.require('remote').require('dialog');
   fs: any = window.require('fs');
   canvasBuffer: any = window.require('electron-canvas-to-buffer');
+  currentFilter: string = '';
   showDropzone: boolean = true;
 
   constructor(
@@ -91,15 +91,6 @@ export class App {
     });
   }
 
-  setFilter(value) {
-    let filterName = value.toLowerCase();
-
-    if (this._cs[filterName])
-      this._cs[filterName]();
-    else
-      this._cs.resetCanvas();
-  }
-
   save(canvas) {
     let self = this
 
@@ -112,6 +103,15 @@ export class App {
 
       self.fs.writeFile(fileName, buffer, function (err) {});
     });
+  }
+
+  setFilter(value) {
+    let filterName = value.toLowerCase();
+
+    if (this._cs[filterName])
+      this._cs[filterName]();
+    else
+      this._cs.resetCanvas();
   }
 
   imageLoaded(canvas, image) {

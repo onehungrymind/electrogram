@@ -28,11 +28,27 @@
   margin-top: 15px;
 }
 
-select {
-  -webkit-appearance: menulist-button;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-size: 16px;
+.carousel {
+  white-space: nowrap;
+  overflow: scroll;
+  padding: 20px;
+}
+
+.carousel .thumb {
+  width: 150px;
+  display: inline-block;
+  margin: 0 10px;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px 0px rgba(0,0,0,0.5);
+}
+
+.carousel img, .carousel canvas {
+  width: 150px;
+}
+
+.carousel .thumb:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 15px 0px rgba(0,0,0,0.5);
 }
 
 button {
@@ -64,31 +80,5 @@ button:hover {
 }
 
 .control {
-  /*display: inline-block;
-  margin-right: 15px;
-  vertical-align: middle;*/
   margin-bottom: 15px;
-}
-
-.carousel {
-  white-space: nowrap;
-  overflow: scroll;
-  padding: 20px;
-}
-
-.carousel .thumb {
-  width: 150px;
-  display: inline-block;
-  margin: 0 10px;
-  border-radius: 2px;
-  box-shadow: 0 2px 10px 0px rgba(0,0,0,0.5);
-}
-
-.carousel img, .carousel canvas {
-  width: 150px;
-}
-
-.carousel .thumb:hover {
-  cursor: pointer;
-  box-shadow: 0 5px 15px 0px rgba(0,0,0,0.5);
 }

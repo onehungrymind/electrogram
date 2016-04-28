@@ -1,7 +1,7 @@
 class CanvasService {
-  context;
-  original;
-  image;
+  context: CanvasRenderingContext2D;
+  original: ImageData;
+  image: HTMLImageElement;
 
   initCanvas(canvas, image) {
     let context = canvas.getContext('2d');
