@@ -87,9 +87,6 @@ export class App {
     let image: HTMLImageElement = new Image();
     image.onload = this.imageLoaded.bind(this, canvas, image);
     image.src = fileName;
-
-    this.showDropzone = false;
-    this.dropzoneStylesVisible = false;
   }
 
   open(canvas) {
@@ -127,6 +124,10 @@ export class App {
   imageLoaded(canvas, image) {
     this.imageElement = image;
     this._cs.initCanvas(canvas, image);
+
+    this.showDropzone = false;
+    this.dropzoneStylesVisible = false;
+    
     this._cd.detectChanges();
   }
 }
