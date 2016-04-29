@@ -2,6 +2,7 @@
   (dragover)="false"
   (dragend)="false"
   (drop)="handleDrop($event, canvas)"
+  [ngClass]="{loaded: !showDropzone}"
   class="dropzone">
 
   <div class="stage">
