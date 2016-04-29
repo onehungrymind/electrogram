@@ -108,7 +108,14 @@ export class App {
 
       let buffer = self.canvasBuffer(canvas, 'image/png');
 
-      self.fs.writeFile(fileName, buffer, function (err) {});
+      self.fs.writeFile(fileName, buffer, function (err) {
+        if (err) {
+          console.log(err);
+          alert('There was an error, please try again.');
+        } else {
+          alert(`Image saved to ${fileName}!`);
+        }
+      });
     });
   }
 
@@ -127,7 +134,7 @@ export class App {
 
     this.showDropzone = false;
     this.dropzoneStylesVisible = false;
-    
+
     this._cd.detectChanges();
   }
 }
