@@ -11,17 +11,13 @@
   left: 10px;
   bottom: 10px;
   right: 10px;
-  border: 3px dashed rgba(255,255,255, 0.5);
+  border: 3px dashed transparent;
   overflow-y: scroll;
 
   transition: border-color .15s linear;
 }
 
-.dropzone.loaded {
-  border-color: transparent;
-}
-
-.dropzone.loaded:hover {
+.dropzone.dragging {
   border-color: rgba(255,255,255, 0.5);
 }
 

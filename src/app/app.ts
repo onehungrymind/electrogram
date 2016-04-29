@@ -47,6 +47,7 @@ export class App {
   dialog: Electron.Dialog = window.require('remote').require('dialog');
   fs: any = window.require('fs');
   canvasBuffer: any = window.require('electron-canvas-to-buffer');
+  dropzoneStylesVisible: boolean = true;
   currentFilter: string = '';
   showDropzone: boolean = true;
 
@@ -54,6 +55,16 @@ export class App {
     private _cd: ChangeDetectorRef,
     private _cs: CanvasService
   ) {}
+
+  showDropzoneStyles(e) {
+    this.dropzoneStylesVisible = true;
+    return false;
+  }
+
+  hideDropzoneStyles(e) {
+    this.dropzoneStylesVisible = false;
+    return false;
+  }
 
   handleDrop(e, canvas) {
     e.preventDefault();
@@ -78,6 +89,7 @@ export class App {
     image.src = fileName;
 
     this.showDropzone = false;
+    this.dropzoneStylesVisible = false;
   }
 
   open(canvas) {

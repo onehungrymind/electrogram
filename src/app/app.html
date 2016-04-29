@@ -1,8 +1,8 @@
 <div
-  (dragover)="false"
-  (dragend)="false"
+  (dragover)="showDropzoneStyles($event)"
+  (dragleave)="hideDropzoneStyles($event)"
   (drop)="handleDrop($event, canvas)"
-  [ngClass]="{loaded: !showDropzone}"
+  [ngClass]="{dragging: dropzoneStylesVisible}"
   class="dropzone">
 
   <div class="stage">
