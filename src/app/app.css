@@ -12,6 +12,7 @@
   bottom: 10px;
   right: 10px;
   border: 3px dashed rgba(255,255,255, 0.5);
+  overflow-y: scroll;
 }
 
 .stage {
@@ -31,9 +32,7 @@
 .stage canvas {
   display: block;
   margin: 0 auto;
-  max-width: 90%;
-  max-height: 500px;
-  height: auto !important;
+  height: 50vmin;
   box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.5);
   border-radius: 3px;
   margin-top: 15px;
