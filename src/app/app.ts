@@ -56,12 +56,12 @@ export class App {
     private _cs: CanvasService
   ) {}
 
-  showDropzoneStyles(e) {
+  showDropzoneStyles() {
     this.dropzoneStylesVisible = true;
     return false;
   }
 
-  hideDropzoneStyles(e) {
+  hideDropzoneStyles() {
     this.dropzoneStylesVisible = false;
     return false;
   }
