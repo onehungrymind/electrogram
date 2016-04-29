@@ -1,9 +1,10 @@
-<div [ngStyle]="{'border': showDropzone ? '3px dotted #FFF' : 'none'}"
+<div
   (dragover)="false"
   (dragend)="false"
   (drop)="handleDrop($event, canvas)"
   class="dropzone">
-  <div #canvasWrapper>
+
+  <div class="stage">
     <div *ngIf="showDropzone">
       <p>
         <strong>Drop a PNG or JPG</strong>
@@ -12,13 +13,13 @@
     </div>
     <canvas [hidden]="!imageElement" #canvas></canvas>
   </div>
-</div>
 
-<div *ngIf="!showDropzone" class="carousel">
-  <canvas thumbnail (click)="setFilter(filter)" *ngFor="#filter of filters"
-          [filter]="filter" #childCanvas
-          [image]="imageElement" [childCanvas]="childCanvas"
-          class="thumb"></canvas>
+  <div *ngIf="!showDropzone" class="carousel">
+    <canvas thumbnail (click)="setFilter(filter)" *ngFor="#filter of filters"
+            [filter]="filter" #childCanvas
+            [image]="imageElement" [childCanvas]="childCanvas"
+            class="thumb"></canvas>
+  </div>
 </div>
 
 <div class="controls">
