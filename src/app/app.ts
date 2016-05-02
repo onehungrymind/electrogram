@@ -3,11 +3,10 @@ let filters = require('./../assets/data/filters.json');
 import {bootstrap} from 'angular2/platform/browser';
 import {ViewChild, Input, Component, Directive, ChangeDetectorRef} from 'angular2/core';
 import { CanvasService } from './canvasService';
-import menuTemplate from './menuTemplate.ts';
 
 let remote = window.require('remote')
-let {dialog, Menu, MenuItem, MenuItemOptions} = remote;
-
+let ipcRenderer = window.require('electron').ipcRenderer;
+let {dialog} = remote;
 
 @Directive({
   selector: '[thumbnail]',
@@ -55,35 +54,15 @@ export class App {
   dropzoneStylesVisible: boolean = true;
   currentFilter: string = '';
   showDropzone: boolean = true;
+  openDialogActive: boolean;
+  saveDialogActive: boolean;
 
   constructor(
     private _cd: ChangeDetectorRef,
     private _cs: CanvasService
   ) {
-    this.setAppMenu();
-  }
-
-  setAppMenu() {
-    menuTemplate.splice(1, 0, {
-      label: 'File',
-      submenu: [
-        {
-          label: 'Open',
-          accelerator: 'CmdOrCtrl+o',
-          click: (item, focusedWindow) => {
-            this.open();
-          }
-        },
-        {
-          label: 'Save As...',
-          accelerator: 'CmdOrCtrl+s',
-          click: (item, focusedWindow) => {
-            this.save();
-          }
-        }
-      ]
-    })
-    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
+    ipcRenderer.on('open-file', this.open.bind(this));
+    ipcRenderer.on('save-file', this.save.bind(this));
   }
 
   showDropzoneStyles() {
@@ -121,36 +100,48 @@ export class App {
 
   open() {
     let self = this;
-    dialog.showOpenDialog( (fileNames) => {
-      if (fileNames === undefined) return;
-      let fileName = fileNames[0];
-      this.loadImage(fileName)
-    });
+    if (!this.openDialogActive && !this.saveDialogActive) {
+      this.openDialogActive = true;
+      dialog.showOpenDialog( (fileNames) => {
+        this.openDialogActive = false;
+        if (fileNames === undefined) return;
+        let fileName = fileNames[0];
+        this.loadImage(fileName)
+      });
+    }
   }
 
   save() {
-    let self = this
+    let self = this;
 
-    dialog.showSaveDialog({ filters: [
-      { name: 'png', extensions: ['png'] }
-    ]}, (fileName) => {
-      if (fileName === undefined) return;
+    if (!this.saveDialogActive && !this.openDialogActive) {
+      this.saveDialogActive = true;
+      dialog.showSaveDialog({ filters: [
+        { name: 'png', extensions: ['png'] }
+      ]}, this.saveFile.bind(this));
+    }
+  }
 
-      let buffer = self.canvasBuffer(this.canvas.nativeElement, 'image/png');
+  saveFile(fileName) {
+    this.saveDialogActive = false;
+    if (fileName === undefined) return;
 
-      self.fs.writeFile(fileName, buffer, (err) => {
-        if (err) {
-          console.log(err);
-          var myNotification = new Notification('Error', {
-            body: 'There was an error; please try again'
-          });
-        } else {
-          var myNotification = new Notification('Image Saved', {
-            body: fileName
-          });
-        }
+    let buffer = this.canvasBuffer(this.canvas.nativeElement, 'image/png');
+
+    this.fs.writeFile(fileName, buffer, this.saveFileCallback.bind(this, fileName));
+  }
+
+  saveFileCallback(fileName, err) {
+    if (err) {
+      console.log(err);
+      var myNotification = new Notification('Error', {
+        body: 'There was an error; please try again'
       });
-    });
+    } else {
+      var myNotification = new Notification('Image Saved', {
+        body: fileName
+      });
+    }
   }
 
   setFilter(value) {

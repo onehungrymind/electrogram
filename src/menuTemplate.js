@@ -1,44 +1,5 @@
-let remote = window.require('remote')
-
-var template: Electron.MenuItemOptions[] = [
-  {
-    label: 'Edit',
-    submenu: [
-      {
-        label: 'Undo',
-        accelerator: 'CmdOrCtrl+Z',
-        role: 'undo'
-      },
-      {
-        label: 'Redo',
-        accelerator: 'Shift+CmdOrCtrl+Z',
-        role: 'redo'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Cut',
-        accelerator: 'CmdOrCtrl+X',
-        role: 'cut'
-      },
-      {
-        label: 'Copy',
-        accelerator: 'CmdOrCtrl+C',
-        role: 'copy'
-      },
-      {
-        label: 'Paste',
-        accelerator: 'CmdOrCtrl+V',
-        role: 'paste'
-      },
-      {
-        label: 'Select All',
-        accelerator: 'CmdOrCtrl+A',
-        role: 'selectall'
-      },
-    ]
-  },
+const app = require('electron').app;
+var template = [
   {
     label: 'View',
     submenu: [
@@ -91,7 +52,7 @@ var template: Electron.MenuItemOptions[] = [
         label: 'Close',
         accelerator: 'CmdOrCtrl+W',
         role: 'close'
-      },
+      }
     ]
   },
   {
@@ -107,7 +68,7 @@ var template: Electron.MenuItemOptions[] = [
 ];
 
 if (process.platform == 'darwin') {
-  let name = remote.app.getName();
+  var name = app.getName();
   template.unshift({
     label: name,
     submenu: [
@@ -146,10 +107,12 @@ if (process.platform == 'darwin') {
       {
         label: 'Quit',
         accelerator: 'Command+Q',
-        click: function() { remote.app.quit(); }
+        click: function() {
+          app.quit();
+        }
       },
     ]
   });
 }
 
-export default template;
+module.exports = template;

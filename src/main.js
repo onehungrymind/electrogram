@@ -3,6 +3,8 @@
 const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
+const Menu = electron.Menu;
+var menuTemplate = require('./menuTemplate');
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
@@ -27,6 +29,27 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  menuTemplate.splice(1, 0, {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Open',
+        accelerator: 'CmdOrCtrl+o',
+        click: function (item, focusedWindow) {
+          mainWindow.webContents.send('open-file');
+        }
+      },
+      {
+        label: 'Save As...',
+        accelerator: 'CmdOrCtrl+s',
+        click: function(item, focusedWindow) {
+          mainWindow.webContents.send('save-file');
+        }
+      }
+    ]
+  })
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 }
 
 // This method will be called when Electron has finished
