@@ -8,31 +8,47 @@ let remote = window.require('remote')
 let ipcRenderer = window.require('electron').ipcRenderer;
 let {dialog} = remote;
 
-@Directive({
+@Component({
   selector: '[thumbnail]',
-  providers: [ CanvasService ]
+  template: `<canvas #childCanvas></canvas>`,
+  providers: [ CanvasService ],
+  styles: [`
+    img, canvas {
+      width: 150px;
+    }
+  `]
 })
 
 class Thumbnail {
-  currentFilter: string = '';
+  currentFilter: string = ''; 
 
   @Input() filter: string = '';
   @Input() image: HTMLImageElement;
-  @Input() childCanvas: HTMLCanvasElement;
+  @ViewChild('childCanvas') childCanvas;
 
   constructor(private _cs: CanvasService) {};
 
-  ngOnChanges() {
-    if (this.image) {
-      this._cs.initCanvas(this.childCanvas, this.image);
-
-      let filterName = this.filter.toLowerCase();
-
-      if (this._cs[filterName])
-        this._cs[filterName]();
-      else
-        this._cs.resetCanvas();
+  ngAfterViewInit() {
+    if (this.image && this.childCanvas) {
+      this.initCanvas();
     }
+  }
+
+  ngOnChanges() {
+    if (this.image && this.childCanvas) {
+      this.initCanvas();
+    }
+  }
+
+  initCanvas() {
+    this._cs.initCanvas(this.childCanvas.nativeElement, this.image);
+
+    let filterName = this.filter.toLowerCase();
+
+    if (this._cs[filterName])
+      this._cs[filterName]();
+    else
+      this._cs.resetCanvas();
   }
 }
 
