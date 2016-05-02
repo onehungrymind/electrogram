@@ -32,7 +32,7 @@
         </div>
 
         <div *ngIf="!showDropzone" class="carousel">
-          <canvas thumbnail (click)="setFilter(filter)" *ngFor="#filter of filters"
+          <canvas thumbnail (click)="setFilter(filter)" *ngFor="let filter of filters"
                   [filter]="filter" [childCanvas]="childCanvas" #childCanvas
                   [image]="imageElement"
                   class="thumb"></canvas>
