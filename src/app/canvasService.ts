@@ -58,7 +58,7 @@ class CanvasService {
 
   // Filter functions
   brighten() {
-    let callback = function(r, g, b, a, factor) {
+    let callback = (r, g, b, a, factor) => {
       return [r + factor, g + factor, b + factor, 255];
     }
 
@@ -66,7 +66,7 @@ class CanvasService {
   }
 
   grayscale() {
-    let callback = function(r, g, b) {
+    let callback = (r, g, b) => {
       let avg = 0.3  * r + 0.59 * g + 0.11 * b;
       return [avg, avg, avg, 255];
     }
@@ -75,7 +75,7 @@ class CanvasService {
   }
 
   sepia() {
-    let callback = function(r, g, b) {
+    let callback = (r, g, b) => {
       var avg = 0.3  * r + 0.59 * g + 0.11 * b;
       return [avg + 100, avg + 50, avg, 255];
     }
@@ -84,7 +84,7 @@ class CanvasService {
   }
 
   negative() {
-    let callback = function(r, g, b) {
+    let callback = (r, g, b) => {
       return [255 - r, 255 - g, 255 - b, 255];
     }
 
@@ -92,7 +92,7 @@ class CanvasService {
   }
 
   noise() {
-    let callback = function(r, g, b, a, factor) {
+    let callback = (r, g, b, a, factor) => {
       var rand =  (0.5 - Math.random()) * factor;
       return [r + rand, g + rand, b + rand, 255];
     }

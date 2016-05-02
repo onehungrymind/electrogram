@@ -4,10 +4,10 @@
       <img class="mdl-layout-title" height="100%" src="./assets/images/electrogram-logo-white.png" alt="Electrogram" />
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
-        <button (click)="open(canvas)" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+        <button (click)="open()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
           <i class="material-icons">open_in_browser</i>
         </button>
-        <button (click)="save(canvas)" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+        <button (click)="save()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
           <i class="material-icons">file_download</i>
         </button>
       </nav>
@@ -33,8 +33,8 @@
 
         <div *ngIf="!showDropzone" class="carousel">
           <canvas thumbnail (click)="setFilter(filter)" *ngFor="#filter of filters"
-                  [filter]="filter" #childCanvas
-                  [image]="imageElement" [childCanvas]="childCanvas"
+                  [filter]="filter" [childCanvas]="childCanvas" #childCanvas
+                  [image]="imageElement"
                   class="thumb"></canvas>
         </div>
       </div>
