@@ -15,14 +15,14 @@
     "css-loader": "^0.23.1",
     "electron-packager": "^7.0.1",
     "electron-prebuilt": "^0.37.8",
+    "electron-reload": "^0.3.0",
     "json-loader": "^0.5.4",
     "raw-loader": "^0.5.1",
     "ts-loader": "^0.8.2",
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.15",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^1.12.15"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.17",

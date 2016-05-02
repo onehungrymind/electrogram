@@ -8,6 +8,8 @@ var menuTemplate = require('./menuTemplate');
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
+require('electron-reload')(__dirname.replace('src', 'build'));
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow, menu;
