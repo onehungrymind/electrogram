@@ -1,3 +1,7 @@
+[hidden] {
+  display: none !important
+}
+
 .mdl-layout__header {
   min-height: 65px;
 }
