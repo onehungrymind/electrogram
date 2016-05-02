@@ -1,6 +1,21 @@
 const app = require('electron').app;
 var template = [
   {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Open',
+        accelerator: 'CmdOrCtrl+o'
+        // Click handler set in main.js
+      },
+      {
+        label: 'Save As...',
+        accelerator: 'CmdOrCtrl+s'
+        // Click handler set in main.js
+      }
+    ]
+  },
+  {
     label: 'View',
     submenu: [
       {
@@ -43,6 +58,10 @@ var template = [
     label: 'Window',
     role: 'window',
     submenu: [
+      {
+        label: 'New',
+        accelerator: 'CmdOrCtrl+N'
+      },
       {
         label: 'Minimize',
         accelerator: 'CmdOrCtrl+M',

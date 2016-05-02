@@ -10,7 +10,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+let mainWindow, menu;
 
 function createWindow () {
   // Create the browser window.
@@ -24,32 +24,48 @@ function createWindow () {
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
+    menu.items[1].submenu.items[0].enabled = false;
+    menu.items[1].submenu.items[1].enabled = false;
+    menu.items[3].submenu.items[0].enabled = true;
+
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
   });
 
-  menuTemplate.splice(1, 0, {
-    label: 'File',
-    submenu: [
-      {
-        label: 'Open',
-        accelerator: 'CmdOrCtrl+o',
-        click: function (item, focusedWindow) {
-          mainWindow.webContents.send('open-file');
-        }
-      },
-      {
-        label: 'Save As...',
-        accelerator: 'CmdOrCtrl+s',
-        click: function(item, focusedWindow) {
-          mainWindow.webContents.send('save-file');
-        }
-      }
-    ]
-  })
-  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
+  if (!menu) setMenu();
+
+  setDock();
+
+  menu.items[1].submenu.items[0].enabled = true;
+  menu.items[1].submenu.items[1].enabled = true;
+  menu.items[3].submenu.items[0].enabled = false;
+}
+
+function setMenu() {
+  menuTemplate[1].submenu[0].click = function () {
+    mainWindow.webContents.send('open-file');
+  }
+
+  menuTemplate[1].submenu[1].click = function () {
+    mainWindow.webContents.send('save-file');
+  }
+
+  menuTemplate[3].submenu[0].click = function() {
+    if (!mainWindow)
+      createWindow();
+  }
+
+  menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+}
+
+function setDock() {
+  var dockMenu = Menu.buildFromTemplate([
+    { label: 'New Window', click:  menu.items[3].submenu.items[0].click }
+  ]);
+  app.dock.setMenu(dockMenu);
 }
 
 // This method will be called when Electron has finished
