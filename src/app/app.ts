@@ -20,7 +20,7 @@ let {dialog} = remote;
 })
 
 class Thumbnail {
-  currentFilter: string = ''; 
+  currentFilter: string = '';
 
   @Input() filter: string = '';
   @Input() image: HTMLImageElement;
@@ -128,8 +128,6 @@ export class App {
   }
 
   save() {
-    let self = this;
-
     if (!this.saveDialogActive && !this.openDialogActive) {
       this.saveDialogActive = true;
       dialog.showSaveDialog({ filters: [
@@ -148,13 +146,14 @@ export class App {
   }
 
   saveFileCallback(fileName, err) {
+    let myNotification: Notification;
     if (err) {
       console.log(err);
-      var myNotification = new Notification('Error', {
+      myNotification = new Notification('Error', {
         body: 'There was an error; please try again'
       });
     } else {
-      var myNotification = new Notification('Image Saved', {
+      myNotification = new Notification('Image Saved', {
         body: fileName
       });
     }
