@@ -13,8 +13,8 @@
     "typings/main"
   ],
   "filesGlob": [
-    "./src/app/**/*.ts",
     "./src/customDefinitions.d.ts",
+    "./src/app/**/*.ts",
     "!./node_modules/**/*.ts",
     "typings/browser.d.ts"
   ],
