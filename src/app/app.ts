@@ -1,11 +1,12 @@
 let filters = require('./../assets/data/filters.json');
 
 import {bootstrap} from 'angular2/platform/browser';
-import {ViewChild, Input, Component, Directive, ChangeDetectorRef} from 'angular2/core';
+import { ViewChild, Input, Component, Directive, ChangeDetectorRef } from 'angular2/core';
 import { CanvasService } from './canvasService';
+import { remote, ipcRenderer } from 'electron';
+import { writeFile } from 'fs';
 
-let remote = window.require('remote')
-let ipcRenderer = window.require('electron').ipcRenderer;
+let canvasBuffer = require('electron-canvas-to-buffer');
 let {dialog} = remote;
 
 @Component({
@@ -65,8 +66,6 @@ export class App {
 
   imageElement: HTMLImageElement;
   filters: Array<Object> = filters;
-  fs: any = require('fs');
-  canvasBuffer: any = window.require('electron-canvas-to-buffer');
   dropzoneStylesVisible: boolean = true;
   currentFilter: string = '';
   showDropzone: boolean = true;
@@ -140,9 +139,9 @@ export class App {
     this.saveDialogActive = false;
     if (fileName === undefined) return;
 
-    let buffer = this.canvasBuffer(this.canvas.nativeElement, 'image/png');
+    let buffer = canvasBuffer(this.canvas.nativeElement, 'image/png');
 
-    this.fs.writeFile(fileName, buffer, this.saveFileCallback.bind(this, fileName));
+    writeFile(fileName, buffer, this.saveFileCallback.bind(this, fileName));
   }
 
   saveFileCallback(fileName, err) {
