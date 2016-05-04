@@ -1,5 +1,5 @@
 body {
-  background: -webkit-linear-gradient(top, #53346D, #000000);
+  background: -webkit-linear-gradient(top, #4b6cb7, #182848);
 }
 
 .mdl-layout__header-row {
@@ -9,5 +9,6 @@ body {
 h1 {
   text-align: center;
   color: whitesmoke;
-  text-shadow: 3px 3px 10px rgba(0,0,0,0.5)
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+  opacity: .7;
 }
