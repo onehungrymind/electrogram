@@ -1,7 +1,7 @@
 let filters = require('./../assets/data/filters.json');
 
-import {bootstrap} from 'angular2/platform/browser';
-import { ViewChild, Input, Component, Directive, ChangeDetectorRef } from 'angular2/core';
+import { bootstrap } from 'angular2/platform/browser';
+import { ViewChild, Input, Component, ChangeDetectorRef, ElementRef } from 'angular2/core';
 import { CanvasService } from './canvasService';
 import { remote, ipcRenderer } from 'electron';
 import { writeFile } from 'fs';
@@ -21,11 +21,9 @@ let {dialog} = remote;
 })
 
 class Thumbnail {
-  currentFilter: string = '';
-
   @Input() filter: string = '';
   @Input() image: HTMLImageElement;
-  @ViewChild('childCanvas') childCanvas;
+  @ViewChild('childCanvas') childCanvas: ElementRef;
 
   constructor(private _cs: CanvasService) {};
 
@@ -56,13 +54,13 @@ class Thumbnail {
 @Component({
   selector: 'app',
   template: require('./app.html'),
-  styles: [require('./app.css')],
-  providers: [CanvasService],
-  directives: [Thumbnail]
+  styles: [ require('./app.css') ],
+  providers: [ CanvasService ],
+  directives: [ Thumbnail ]
 })
 
 export class App {
-  @ViewChild('canvas') canvas;
+  @ViewChild('canvas') canvas: ElementRef;
 
   imageElement: HTMLImageElement;
   filters: Array<Object> = filters;
@@ -90,7 +88,7 @@ export class App {
     return false;
   }
 
-  handleDrop(e, canvas) {
+  handleDrop(e) {
     e.preventDefault();
     var files: File = e.dataTransfer.files;
 
@@ -114,7 +112,6 @@ export class App {
   }
 
   open() {
-    let self = this;
     if (!this.openDialogActive && !this.saveDialogActive) {
       this.openDialogActive = true;
       dialog.showOpenDialog( (fileNames) => {

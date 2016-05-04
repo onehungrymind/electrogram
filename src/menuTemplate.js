@@ -1,4 +1,7 @@
 const app = require('electron').app;
+
+// Most of this template is boilerplate;
+// the only things added in are the "File" menu and the "New" window task
 var template = [
   {
     label: 'File',
@@ -53,6 +56,7 @@ var template = [
       {
         label: 'New',
         accelerator: 'CmdOrCtrl+N'
+        // Click handler set in main.js
       },
       {
         label: 'Minimize',
