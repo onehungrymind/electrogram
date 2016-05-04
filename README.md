@@ -1,6 +1,6 @@
-# Electrogram
+# Electrogram (01-hello-electron)
 
-A simple photo editor built with Angular 2 and electron. It allows you to upload/drag-and-drop images, apply filters to them, and save them to your desktop.
+A basic electron app that just displays some styled text in a window.
 
 ## Prerequisites
 You will need to have [Git](https://git-scm.com/) and [Node.js + NPM](http://nodejs.org) installed on your machine.
@@ -11,17 +11,31 @@ First you will need to clone the repo; then you can install the necessary NPM pa
 
 ```bash
 # Clone the repo and enter it
-git clone git@github.com:onehungrymind/electrogram.git
+git clone https://github.com/onehungrymind/electrogram.git
 cd electrogram
 
 # Install dependencies
 npm i
 
-# Run the app
-npm start
+# Start the Electron app
+npm start # runs "electron main.js"
 ```
 
-`npm start` runs `electron main.js` internally and starts up the app in Electron.
+## The code
+Here is a quick overview of the project structure:
+```
+electrogram/
+ │
+ ├──assets/                    * static assets are served here
+ │   ├──css/                   * global styles
+ │   └──images/                * app logo
+ │
+ ├──index.html                 * parent HTML page where we include our built javascript files
+ │
+ ├──main.js                    * NodeJS script that bootstraps the Electron app
+ │
+ └──package.json               * what npm uses to manage it's dependencies and scripts
+ ```
 
 ## Author
 <img width="50px" src="https://pbs.twimg.com/profile_images/505753644004687872/_5-AcJkD_400x400.jpeg" alt="Luke Ruebbelke">
