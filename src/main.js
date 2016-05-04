@@ -3,6 +3,7 @@
 const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
+// Module to handle the application menu
 const Menu = electron.Menu;
 let menuTemplate = require('./menuTemplate');
 // Module to create native browser window.
