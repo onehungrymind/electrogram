@@ -19,7 +19,7 @@
       <div
         (dragover)="showDropzoneStyles()"
         (dragleave)="hideDropzoneStyles()"
-        (drop)="handleDrop($event, canvas)"
+        (drop)="handleDrop($event)"
         [ngClass]="{dragging: dropzoneStylesVisible}"
         class="dropzone">
 
