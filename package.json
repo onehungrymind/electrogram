@@ -8,9 +8,6 @@
   },
   "author": "One Hungry Mind",
   "license": "MIT",
-  "devDependencies": {
-    "electron-prebuilt": "^0.35.6"
-  },
   "dependencies": {
     "material-design-lite": "^1.1.3"
   }
