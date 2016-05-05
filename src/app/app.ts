@@ -67,8 +67,8 @@ export class App {
   dropzoneStylesVisible: boolean = true;
   currentFilter: string = '';
   showDropzone: boolean = true;
-  openDialogActive: boolean;
-  saveDialogActive: boolean;
+  openDialogActive: boolean = false;
+  saveDialogActive: boolean = false;
 
   constructor(
     private _cd: ChangeDetectorRef,
