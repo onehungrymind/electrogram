@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron main.js"
+    
   },
   "author": "One Hungry Mind",
   "license": "MIT",
