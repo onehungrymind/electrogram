@@ -142,13 +142,9 @@ export class App {
     let myNotification: Notification;
     if (err) {
       console.log(err);
-      myNotification = new Notification('Error', {
-        body: 'There was an error; please try again'
-      });
+      // Put a notification here
     } else {
-      myNotification = new Notification('Image Saved', {
-        body: fileName
-      });
+      // Put a notification here
     }
   }
 
