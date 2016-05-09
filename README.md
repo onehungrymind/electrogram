@@ -3,7 +3,7 @@
 A simple photo editor built with Angular 2 and electron. It allows you to upload/drag-and-drop images, apply filters to them, and save them to your desktop.
 
 ## Prerequisites
-You will need to have [Git](https://git-scm.com/) and [Node.js + NPM](http://nodejs.org) installed on your machine.
+You will need to have [Git](https://git-scm.com/) and [Node.js + NPM](http://nodejs.org) installed on your machine. Once those are installed, you will need to install the `typings` NPM package globally. `Typings` handles the typescript definition files for our application.
 
 ## Getting started
 
@@ -14,8 +14,11 @@ First you will need to clone the repo; then you can install the necessary NPM pa
 git clone https://github.com/onehungrymind/electrogram.git
 cd electrogram
 
-# Install dependencies and type definitions
+# Install dependencies
 npm i
+
+# Install type definitions
+typings install
 
 # To build only
 npm run build
