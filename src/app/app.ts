@@ -1,7 +1,7 @@
 let filters = require('./../assets/data/filters.json');
 
-import { bootstrap } from 'angular2/platform/browser';
-import { ViewChild, Input, Component, ChangeDetectorRef, ElementRef } from 'angular2/core';
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { ViewChild, Input, Component, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { CanvasService } from './canvasService';
 import { remote, ipcRenderer } from 'electron';
 import { writeFile } from 'fs';
