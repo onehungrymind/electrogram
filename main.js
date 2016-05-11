@@ -7,7 +7,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 // Allows for live-reload while developing the app
-require('electron-reload')(__dirname.replace('src', 'build'));
+require('electron-reload')(__dirname + '/build');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
