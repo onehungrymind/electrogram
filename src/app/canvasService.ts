@@ -1,3 +1,5 @@
+import {nativeImage} from 'electron';
+
 class CanvasService {
   context: CanvasRenderingContext2D;
   original: ImageData;
@@ -98,6 +100,25 @@ class CanvasService {
     }
 
     this.transform(callback, 100);
+  }
+
+  canvasBuffer(canvas, type, quality?) {
+    let types = ['image/png', 'image/jpg', 'image/jpeg']
+
+    type = type || 'image/png'
+    quality = typeof quality === 'number' ? quality : 0.9
+
+    if (types.indexOf(type) === -1) {
+      throw new Error('unsupported image type ' + type)
+    }
+
+    let data = canvas.toDataURL(type, quality)
+    let img = nativeImage.createFromDataURL(data) // electron v0.36+
+    if (/^image\/jpe?g$/.test(type)) {
+      return img.toJpeg(Math.floor(quality * 100))
+    } else {
+      return img.toPng()
+    }
   }
 }
 
