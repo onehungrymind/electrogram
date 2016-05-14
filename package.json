@@ -4,18 +4,16 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js",
+    "start": "npm run watch & npm run serve",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
-    "distribute": "electron-packager . Electrogram --platform=darwin --arch=x64 --out=releases/ --overwrite --icon=src/assets/images/electrogram  --asar"
+    "serve": "browser-sync start --files 'build/**/**.*' --server"
   },
   "author": "One Hungry Mind",
   "license": "MIT",
   "devDependencies": {
+    "browser-sync": "^2.12.8",
     "css-loader": "^0.23.1",
-    "electron-packager": "^7.0.1",
-    "electron-prebuilt": "^1.0.1",
-    "electron-reload": "^0.3.0",
     "json-loader": "^0.5.4",
     "raw-loader": "^0.5.1",
     "ts-loader": "^0.8.2",

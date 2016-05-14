@@ -52,6 +52,5 @@ module.exports = {
 
   plugins: [
     new CommonsChunkPlugin({ names: ['@angular', 'common'], minChunks: Infinity })
-  ],
-  target:'electron-renderer'
+  ]
 };
