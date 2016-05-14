@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "npm run watch & npm run serve",
+    "start": "electron main.js",
+    "web-start": "npm run watch & npm run serve",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "watch": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
     "serve": "browser-sync start --files 'build/**/**.*' --server"
@@ -14,6 +15,8 @@
   "devDependencies": {
     "browser-sync": "^2.12.8",
     "css-loader": "^0.23.1",
+    "electron-prebuilt": "^1.0.2",
+    "electron-reload": "^0.3.0",
     "json-loader": "^0.5.4",
     "raw-loader": "^0.5.1",
     "ts-loader": "^0.8.2",
