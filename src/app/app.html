@@ -1,7 +1,7 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header mdl-layout__header--transparent">
     <div class="mdl-layout__header-row">
-      <img class="mdl-layout-title" height="100%" src="./assets/images/electrogram-logo-white.png" alt="Electrogram" />
+      <img class="mdl-layout-title" height="100%" src="./src/assets/images/electrogram-logo-white.png" alt="Electrogram" />
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
         <button (click)="open()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
@@ -19,22 +19,22 @@
       <div
         (dragover)="showDropzoneStyles()"
         (dragleave)="hideDropzoneStyles()"
-        (drop)="handleDrop($event)"
+        (drop)="handleDrop($event, canvas)"
         [ngClass]="{dragging: dropzoneStylesVisible}"
         class="dropzone">
 
         <div class="stage">
           <div *ngIf="showDropzone">
             <h1>DROP A PNG OR JPG</h1>
-            <img class="placeholder" src="assets/images/placeholder.png">
+            <img class="placeholder" src="./src/assets/images/placeholder.png">
           </div>
           <canvas [hidden]="!imageElement" #canvas></canvas>
         </div>
 
         <div *ngIf="!showDropzone" class="carousel">
           <div thumbnail (click)="setFilter(filter)"
-               [filter]="filter" class="thumb" [image]="imageElement"
-               *ngFor="let filter of filters">
+            [filter]="filter" class="thumb" [image]="imageElement"
+            *ngFor="let filter of filters">
           </div>
         </div>
       </div>

@@ -6,7 +6,6 @@ import { CanvasService } from './canvasService';
 import { remote } from 'electron';
 import { writeFile } from 'fs';
 
-let canvasBuffer = require('electron-canvas-to-buffer');
 let {dialog} = remote;
 
 @Component({
@@ -133,7 +132,7 @@ export class App {
     this.saveDialogActive = false;
     if (fileName === undefined) return;
 
-    let buffer = canvasBuffer(this.canvas.nativeElement, 'image/png');
+    let buffer = this._cs.canvasBuffer(this.canvas.nativeElement, 'image/png');
 
     writeFile(fileName, buffer, this.saveFileCallback.bind(this, fileName));
   }
@@ -142,9 +141,9 @@ export class App {
     let myNotification: Notification;
     if (err) {
       console.log(err);
-      // Put a notification here
+      // CHALLENGE: Put a error notification here
     } else {
-      // Put a notification here
+      // CHALLENGE: Put a success notification here
     }
   }
 

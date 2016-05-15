@@ -1,3 +1,5 @@
+import {nativeImage} from 'electron';
+
 class CanvasService {
   context: CanvasRenderingContext2D;
   original: ImageData;
@@ -46,11 +48,11 @@ class CanvasService {
     let res = [];
     let len = newpx.length;
     for (var i = 0; i < len; i += 4) {
-     res = cb.call(this, oldpx[i], oldpx[i+1], oldpx[i+2], oldpx[i+3], factor, i);
-     newpx[i]   = res[0]; // r
-     newpx[i+1] = res[1]; // g
-     newpx[i+2] = res[2]; // b
-     newpx[i+3] = res[3]; // a
+      res = cb.call(this, oldpx[i], oldpx[i+1], oldpx[i+2], oldpx[i+3], factor, i);
+      newpx[i]   = res[0]; // r
+      newpx[i+1] = res[1]; // g
+      newpx[i+2] = res[2]; // b
+      newpx[i+3] = res[3]; // a
     }
 
     this.setData(newdata);
@@ -60,7 +62,7 @@ class CanvasService {
   brighten() {
     let callback = (r, g, b, a, factor) => {
       return [r + factor, g + factor, b + factor, 255];
-    }
+    };
 
     this.transform(callback, 100);
   }
@@ -69,7 +71,7 @@ class CanvasService {
     let callback = (r, g, b) => {
       let avg = 0.3  * r + 0.59 * g + 0.11 * b;
       return [avg, avg, avg, 255];
-    }
+    };
 
     this.transform(callback, 1);
   }
@@ -78,7 +80,7 @@ class CanvasService {
     let callback = (r, g, b) => {
       var avg = 0.3  * r + 0.59 * g + 0.11 * b;
       return [avg + 100, avg + 50, avg, 255];
-    }
+    };
 
     this.transform(callback, 1);
   }
@@ -86,7 +88,7 @@ class CanvasService {
   negative() {
     let callback = (r, g, b) => {
       return [255 - r, 255 - g, 255 - b, 255];
-    }
+    };
 
     this.transform(callback, 1);
   }
@@ -95,9 +97,28 @@ class CanvasService {
     let callback = (r, g, b, a, factor) => {
       var rand =  (0.5 - Math.random()) * factor;
       return [r + rand, g + rand, b + rand, 255];
-    }
+    };
 
     this.transform(callback, 100);
+  }
+
+  canvasBuffer(canvas, type, quality?) {
+    let types = ['image/png', 'image/jpg', 'image/jpeg']
+
+    type = type || 'image/png'
+    quality = typeof quality === 'number' ? quality : 0.9
+
+    if (types.indexOf(type) === -1) {
+      throw new Error('unsupported image type ' + type)
+    }
+
+    let data = canvas.toDataURL(type, quality)
+    let img = nativeImage.createFromDataURL(data) // electron v0.36+
+    if (/^image\/jpe?g$/.test(type)) {
+      return img.toJpeg(Math.floor(quality * 100))
+    } else {
+      return img.toPng()
+    }
   }
 }
 
