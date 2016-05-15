@@ -73,8 +73,8 @@ export class App {
     private _cd: ChangeDetectorRef,
     private _cs: CanvasService
   ) {
-    ipcRenderer.on('open-file', this.open.bind(this));
-    ipcRenderer.on('save-file', this.save.bind(this));
+    // CHALLENGE: Add an 'open-file' handler here
+    // CHALLENGE: Add a 'save-file' handler here
   }
 
   showDropzoneStyles() {

@@ -42,7 +42,7 @@ let createWindow = () => {
 
   toggleFileTasks(true);
   toggleNewWindowTask(false);
-}
+};
 
 let toggleFileTasks = isEnabled => {
   // The 'File' menu should only be available if there is an open window
@@ -50,7 +50,7 @@ let toggleFileTasks = isEnabled => {
     .find(item => item.label === 'File')
     .submenu.items
     .forEach(subItem => subItem.enabled = isEnabled);
-}
+};
 
 let toggleNewWindowTask = isEnabled => {
   // The 'New Window' task in the main menu and dock menu
@@ -65,20 +65,21 @@ let toggleNewWindowTask = isEnabled => {
 
   newWindowMenu.enabled = isEnabled;
   dockWindowMenu.enabled = isEnabled;
-}
+};
 
 let setMenu = () => {
   // Set custom click handlers for menu tasks
   let fileMenu = menuTemplate
     .find(item => item.label === 'File');
 
+  // CHALLENGE: Adding 'open' and 'save as' event handlers
   fileMenu.submenu
-    .find(item => item.label === 'Open')
-    .click = () => mainWindow.webContents.send('open-file')
+    .find(item => item.label === 'Open');
+    //.click = () => SEND AN 'open-file' EVENT HERE
 
   fileMenu.submenu
-    .find(item => item.label === 'Save As...')
-    .click = () => mainWindow.webContents.send('save-file')
+    .find(item => item.label === 'Save As...');
+    //.click = () => SEND A 'save-file' EVENT HERE
 
   menuTemplate
     .find(item => item.label === 'Window')
@@ -88,7 +89,7 @@ let setMenu = () => {
 
   menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
-}
+};
 
 let setDock = () => {
   // Create a 'New Window' task in the dock menu (OSX only)
@@ -96,7 +97,7 @@ let setDock = () => {
     { label: 'New Window', click: createWindow }
   ]);
   app.dock.setMenu(dockMenu);
-}
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
