@@ -3,7 +3,7 @@
 A simple photo editor built with Angular 2 and electron. It allows you to upload/drag-and-drop images, apply filters to them, and save them to your desktop.
 
 ## Prerequisites
-You will need to have [Git](https://git-scm.com/) and [Node.js + NPM](http://nodejs.org) installed on your machine. Once those are installed, you will need to install the `typings` NPM package globally. `Typings` handles the typescript definition files for our application.
+You will need to have [Git](https://git-scm.com/) and [Node.js (5.x and above) + NPM (3.x and above)](http://nodejs.org). We generally suggest installing [`NVM`](https://github.com/creationix/nvm) to manage Node versions. Once those are installed, you will need to install the `typings` NPM package globally. `Typings` handles the typescript definition files for our application.
 
 ## Getting started
 
