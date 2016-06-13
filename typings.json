@@ -3,7 +3,7 @@
    
   },
   "devDependencies": {},
-  "ambientDependencies": {
+  "globalDependencies": {
     "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#64b25f63f0ec821040a5d3e049a976865062ed9d",
     "core-js": "registry:dt/core-js#0.0.0+20160317120654",
     "github-electron": "registry:dt/github-electron#0.37.6+20160417155838",
