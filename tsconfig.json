@@ -16,7 +16,7 @@
     "./src/customDefinitions.d.ts",
     "./src/app/**/*.ts",
     "!./node_modules/**/*.ts",
-    "typings/browser.d.ts"
+    "typings/index.d.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
     "resolveGlobs": true,
