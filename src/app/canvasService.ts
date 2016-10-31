@@ -115,9 +115,9 @@ class CanvasService {
     let data = canvas.toDataURL(type, quality)
     let img = nativeImage.createFromDataURL(data) // electron v0.36+
     if (/^image\/jpe?g$/.test(type)) {
-      return img.toJpeg(Math.floor(quality * 100))
+      return img.toJPEG(Math.floor(quality * 100))
     } else {
-      return img.toPng()
+      return img.toPNG()
     }
   }
 }
