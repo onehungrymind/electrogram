@@ -1,6 +1,8 @@
 let filters = require('./../assets/data/filters.json');
 
-import { bootstrap } from '@angular/platform-browser-dynamic';
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ViewChild, Input, Component, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { CanvasService } from './canvasService';
 import { remote, ipcRenderer } from 'electron';
@@ -54,8 +56,7 @@ class Thumbnail {
   selector: 'app',
   template: require('./app.html'),
   styles: [ require('./app.css') ],
-  providers: [ CanvasService ],
-  directives: [ Thumbnail ]
+  providers: [ CanvasService ]
 })
 
 export class App {
@@ -174,4 +175,13 @@ export class App {
   }
 }
 
-bootstrap(App);
+@NgModule({
+  imports:      [ BrowserModule ],
+  declarations: [ App,Thumbnail ],
+  providers:    [ CanvasService ],      
+  bootstrap:    [ App ]
+})
+
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
